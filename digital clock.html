@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Clock</title>
+    <!-- React and ReactDOM CDN links -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <!-- Babel for JSX support -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+          background: linear-gradient(to bottom right, #2c3e50, #3498db);
+          font-family: 'Arial', sans-serif;
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+        }
+  
+        #root {
+          background-color: rgba(44, 62, 80, 0.8);
+          border-radius: 15px;
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+          padding: 40px;
+          text-align: center;
+        }
+  
+        h1 {
+          font-size: 3rem;
+          margin-bottom: 20px;
+        }
+  
+        .clock {
+          font-size: 5rem;
+          font-family: 'Courier New', Courier, monospace;
+          border: 2px solid #0f0;
+          border-radius: 10px;
+          padding: 20px;
+          background-color: rgba(0, 0, 0, 0.7);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+      </style>
+  </head>
+  <body>
+    <!-- Root element where the React app will be mounted -->
+    <div id="root"></div>
+
+    <!-- React code using JSX -->
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+
+      const DigitalClock = () => {
+        const [time, setTime] = useState(new Date());
+
+        useEffect(() => {
+          const intervalId = setInterval(() => {
+            setTime(new Date());
+          }, 1000);
+
+          return () => clearInterval(intervalId);
+        }, []);
+
+        const formattedTime = time.toLocaleTimeString();
+
+        return (
+          <div style={{ 
+            fontSize: '2rem', 
+            fontFamily: 'monospace', 
+            textAlign: 'center', 
+            padding: '20px', 
+            borderRadius: '8px', 
+            backgroundColor: '#222', 
+            color: '#0f0' 
+          }}>
+            {formattedTime}
+          </div>
+        );
+      };
+
+      ReactDOM.render(<DigitalClock />, document.getElementById('root'));
+    </script>
+  </body>
+</html>
